@@ -7,6 +7,7 @@ const { owner, repo } = github.context.repo;
 async function main() {
   const prefix = core.getInput('prefix') || 'test';
   const debug = core.getInput('debug') || false;
+  const exportDiff = core.getInput('export_diff') === undefined ? true : false;
 
   function log(message) {
     if (!debug) return;
@@ -47,7 +48,7 @@ async function main() {
 
   log(`createRefStatus ${createRefStatus.status} - ${JSON.stringify(createRefStatus.data)}`);
 
-  if (latestVersion) {
+  if (latestVersion && exportDiff) {
 
     log(`compareCommits refs/tags/${latestVersion} - refs/tags/${currentTagVersion}`);
 
@@ -64,13 +65,10 @@ async function main() {
     const changelogContent = changelog
       .map(
         (commit, i) => {
-          return `${i === 0 ? '\n' : ''}${i + 1}) ${commit.commit.message}${
-            commit.hasOwnProperty('author')
-              ? commit.author.hasOwnProperty('login')
-                ? ' (' + commit.author.login + ')'
-                : ''
-              : ''
-          }\n(SHA: ${commit.sha})\n`;
+          return `#${i === 0 ? '\n' : ''}${i + 1})
+          (@${commit?.author?.login ?? ''})
+          (SHA: ${commit.sha.slice(0, 6)})
+          ${commit.commit.message}\n`;
         }
       )
       .join('\n');

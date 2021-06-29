@@ -54,15 +54,14 @@ async function main() {
     const { status: changelogStatus, data: changelog } = await octokit.rest.repos.listCommits({
       owner,
       repo,
-      sha: latestVersion.hash,
     });
 
     if (changelogStatus !== 200) {
       return core.warn(`fetch commits between refs/tags/${latestVersion.tag} - refs/tags/${currentTag} failed!`);
     };
 
-    log(`get changelog, ${JSON.stringify(changelog.commits)}`);
-    const changelogContent = changelog.commits
+    log(`get changelog, ${JSON.stringify(changelog)}`);
+    const changelogContent = changelog
       .map(
         (commit, i) => {
           return `${i === 0 ? '\n' : ''}${i + 1}) ${commit.commit.message}${

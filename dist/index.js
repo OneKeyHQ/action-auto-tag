@@ -6344,8 +6344,8 @@ async function main() {
     const changelogContent = changelog
       .map(
         (commit, i) => {
-          return `#${i === 0 ? '\n' : ''}${i + 1})
-          (@${commit.author ? (commit.author.login || '') : ''})
+          return `#${i === 0 ? '\n' : ''}${i + 1}) \
+          (@${commit.author ? (commit.author.login || '') : ''}) \
           (SHA: ${commit.sha.slice(0, 6)})
           ${commit.commit.message}\n`;
         }

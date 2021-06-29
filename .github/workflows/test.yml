@@ -19,4 +19,5 @@ jobs:
           PREV_TAG: ${{ env.PREV_TAG }}
           CURR_TAG: ${{ env.CURR_TAG }}
           DIFF_CHANGE_LOG: ${{ env.DIFF_CHANGE_LOG }}
-        run: echo $(PREV_TAG) $(CURR_TAG) $(DIFF_CHANGE_LOG)
+        run: |
+          echo -e "PREV_TAG: $PREV_TAG\nCURR_TAG: $CURR_TAG\nDIFF_CHANGE_LOG:\n$DIFF_CHANGE_LOG"

@@ -66,7 +66,7 @@ async function main() {
       .map(
         (commit, i) => {
           return `#${i === 0 ? '\n' : ''}${i + 1})
-          (@${commit?.author?.login ?? ''})
+          (@${commit.author ? (commit.author.login || '') : ''})
           (SHA: ${commit.sha.slice(0, 6)})
           ${commit.commit.message}\n`;
         }

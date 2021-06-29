@@ -5,8 +5,8 @@ const github = new gh.GitHub(process.env.GITHUB_TOKEN || process.env.INPUT_GITHU
 const { owner, repo } = gh.context.repo;
 
 async function main() {
-  const prefix = core.getInput('prefix') ?? 'test';
-  const debug = core.getInput('debug') ?? false;
+  const prefix = core.getInput('prefix') || 'test';
+  const debug = core.getInput('debug') || false;
 
   function log(message) {
     if (!debug) return;

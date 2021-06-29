@@ -9,6 +9,7 @@ async function main() {
   const debug = core.getInput('debug') || false;
   const exportDiff = core.getInput('export_diff') === undefined ? true : false;
 
+  console.log("core.getInput('export_diff')", core.getInput('export_diff'));
   function log(message) {
     if (!debug) return;
     console.log(`==== auto-tag action ====: ${message} \n`);

@@ -9,6 +9,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Test Auto Tag
         uses: ./
+        env:
+          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
         with:
           prefix: test
           debug: true

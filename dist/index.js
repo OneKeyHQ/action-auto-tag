@@ -6326,15 +6326,17 @@ async function main() {
   log(`createRefStatus ${createRefStatus.status} - ${JSON.stringify(createRefStatus.data)}`);
 
   if (latestVersion) {
-    const { status: changelogStatus, data: changelog } = await octokit.rest.repos.compareCommits({
+
+    log(`compareCommits refs/tags/${latestVersion} - refs/tags/${currentTagVersion}`);
+
+    const { status: changelogStatus, data: changelog } = await octokit.rest.repos.listCommits({
       owner,
       repo,
-      base: `refs/tags/${latestVersion}`,
-      head: `refs/tags/${currentTagVersion}`
+      sha: latestVersion.hash,
     });
 
     if (changelogStatus !== 200) {
-      return core.warn(`fetch commits between refs/tags/${latestVersion} - refs/tags/${currentTagVersion} failed!`);
+      return core.warn(`fetch commits between refs/tags/${latestVersion.tag} - refs/tags/${currentTag} failed!`);
     };
 
     log(`get changelog, ${JSON.stringify(changelog.commits)}`);

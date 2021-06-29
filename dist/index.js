@@ -6301,7 +6301,7 @@ async function main() {
 
   if (status !== 200) throw new Error('get previous tags failed, please retry!');
 
-  log(`get previous tags ${JSON.stringify(data)}`);
+  log(`get previous tags ${JSON.stringify(previousTags)}`);
 
   const formattedTags = previousTags
     .map((payload) => ({tag: +payload.ref.replace(`refs/tags/${prefix}-`, ''), hash: payload.object.sha}))

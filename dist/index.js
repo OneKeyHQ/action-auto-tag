@@ -6285,9 +6285,9 @@ const { owner, repo } = github.context.repo;
 async function main() {
   const prefix = core.getInput('prefix') || 'test';
   const debug = core.getInput('debug') || false;
-  const exportDiff = core.getInput('export_diff') === undefined ? true : false;
+  const exportDiff = core.getInput('export_diff') === 'false' ? false : true;
 
-  console.log("core.getInput('export_diff')", core.getInput('export_diff'));
+  console.log("core.getInput('export_diff')", core.getInput('export_diff'), typeof core.getInput('export_diff'));
   function log(message) {
     if (!debug) return;
     console.log(`==== auto-tag action ====: ${message} \n`);

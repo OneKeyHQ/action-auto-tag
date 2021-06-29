@@ -66,10 +66,7 @@ async function main() {
     const changelogContent = changelog
       .map(
         (commit, i) => {
-          return `#${i === 0 ? '\n' : ''}${i + 1}) \
-          (@${commit.author ? (commit.author.login || '') : ''}) \
-          (SHA: ${commit.sha.slice(0, 6)})
-          ${commit.commit.message}\n`;
+          return `#${i === 0 ? '\n' : ''}${i + 1}) (@${commit.author ? (commit.author.login || '') : ''}) (SHA: ${commit.sha.slice(0, 6)}) ${commit.commit.message}\n`;
         }
       )
       .join('\n');
@@ -78,7 +75,7 @@ async function main() {
   }
 
   core.exportVariable('PREV_TAG', latestVersion);
-  core.exportVariable('CURR_TAG', currentTagVersion);
+  core.exportVariable('CURR_TAG', currentTag);
 
   log(`PREV_TAG: ${latestVersion}`);
   log(`CURR_TAG: ${currentTagVersion}`);

@@ -6276,11 +6276,10 @@ module.exports = require("zlib");;
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const gh = __nccwpck_require__(438)
+const github = __nccwpck_require__(438)
 const core = __nccwpck_require__(186)
 
-const github = new gh.GitHub(process.env.GITHUB_TOKEN || process.env.INPUT_GITHUB_TOKEN);
-const { owner, repo } = gh.context.repo;
+const { owner, repo } = github.context.repo;
 
 async function main() {
   const prefix = core.getInput('prefix') || 'test';
@@ -6320,7 +6319,7 @@ async function main() {
     owner,
     repo,
     ref: `refs/tags/${currentTag}`,
-    sha: gh.context.sha,
+    sha: github.context.sha,
   });
 
   log(`createRefStatus ${createRefStatus.status} - ${JSON.stringify(createRefStatus.data)}`);

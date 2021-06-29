@@ -1,8 +1,7 @@
-const gh = require('@actions/github')
+const github = require('@actions/github')
 const core = require('@actions/core')
 
-const github = new gh.GitHub(process.env.GITHUB_TOKEN || process.env.INPUT_GITHUB_TOKEN);
-const { owner, repo } = gh.context.repo;
+const { owner, repo } = github.context.repo;
 
 async function main() {
   const prefix = core.getInput('prefix') || 'test';
@@ -42,7 +41,7 @@ async function main() {
     owner,
     repo,
     ref: `refs/tags/${currentTag}`,
-    sha: gh.context.sha,
+    sha: github.context.sha,
   });
 
   log(`createRefStatus ${createRefStatus.status} - ${JSON.stringify(createRefStatus.data)}`);

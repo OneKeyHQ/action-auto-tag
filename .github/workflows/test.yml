@@ -11,6 +11,7 @@ jobs:
         uses: ./
         with:
           prefix: test
+          debug: true
       - name: Check Env
         env:
           PREV_TAG: ${{ env.PREV_TAG }}

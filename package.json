@@ -1,0 +1,27 @@
+{
+  "name": "action-auto-tag",
+  "private": true,
+  "description": "auto tag for github actions",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OneKeyHQ/action-auto-tag.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OneKeyHQ/action-auto-tag/issues"
+  },
+  "homepage": "https://github.com/OneKeyHQ/action-auto-tag#readme",
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "@actions/github": "^5.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.28.6"
+  }
+}

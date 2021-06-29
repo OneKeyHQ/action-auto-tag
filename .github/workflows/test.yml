@@ -1,0 +1,19 @@
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Test Auto Tag
+        uses: ./
+        with:
+          prefix: test
+      - name: Check Env
+        env:
+          PREV_TAG: ${{ env.PREV_TAG }}
+          CURR_TAG: ${{ env.CURR_TAG }}
+          DIFF_CHANGE_LOG: ${{ env.DIFF_CHANGE_LOG }}
+        run: echo $(PREV_TAG) $(CURR_TAG) $(DIFF_CHANGE_LOG)

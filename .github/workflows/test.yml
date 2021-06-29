@@ -10,7 +10,7 @@ jobs:
       - name: Test Auto Tag
         uses: ./
         env:
-          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           prefix: test
           debug: true

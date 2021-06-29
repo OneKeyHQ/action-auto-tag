@@ -1,0 +1,16 @@
+name: '@onekeyhq/auto-tag'
+description: 'github action for auto tag in workflow'
+author: 'onekeyhq'
+inputs:
+  prefix:
+    description: 'tag prefix, default is `test`'
+    required: false
+  export_diff:
+    description: 'export git diff between previous tag and current tag'
+    required: false
+  debug:
+    description: 'show log for github openAPI request / response'
+    required: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

@@ -1,6 +1,7 @@
 const github = require('@actions/github')
 const core = require('@actions/core')
 
+const octokit = new github.getOctokit(process.env.GITHUB_TOKEN || process.env.INPUT_GITHUB_TOKEN);
 const { owner, repo } = github.context.repo;
 
 async function main() {
@@ -12,7 +13,7 @@ async function main() {
     console.log(`==== auto-tag action ====: ${message} \n`);
   }
 
-  const { status, data: previousTags } = await github.git.listMatchingRefs({
+  const { status, data: previousTags } = await octokit.rest.git.listMatchingRefs({
     owner,
     repo,
     ref: `tags/${prefix}`,
@@ -37,7 +38,7 @@ async function main() {
 
   const currentTag = `${prefix}-${currentTagVersion}`;
 
-  const createRefStatus = await github.git.createRef({
+  const createRefStatus = await octokit.rest.git.createRef({
     owner,
     repo,
     ref: `refs/tags/${currentTag}`,
@@ -47,7 +48,7 @@ async function main() {
   log(`createRefStatus ${createRefStatus.status} - ${JSON.stringify(createRefStatus.data)}`);
 
   if (latestVersion) {
-    const { status: changelogStatus, data: changelog } = await github.repos.compareCommits({
+    const { status: changelogStatus, data: changelog } = await octokit.rest.repos.compareCommits({
       owner,
       repo,
       base: `refs/tags/${latestVersion}`,
